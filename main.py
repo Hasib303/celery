@@ -1,6 +1,13 @@
-def main():
-    print("Hello from celery!")
+from celery import Celery
+from time import sleep
 
+app = Celery("main", broker="redis://localhost:6379")
 
-if __name__ == "__main__":
-    main()
+@app.task
+def process(x, y):
+    i = 0
+    while i <5:
+        sleep(1)
+        i+=1
+        print("Processing...")
+    return x**2 + y**2

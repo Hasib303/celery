@@ -1,0 +1,15 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_server
+    ports:
+      - "6379:6379"
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest # Fixed image name
+    ports:
+      - "8081:8081"
+    environment:
+      - REDIS_HOSTS=local:redis:6379 # Fixed variable name (plural)
+    depends_on:
+      - redis # Ensures redis starts first
