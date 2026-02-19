@@ -1,7 +1,7 @@
 from celery import Celery
 from time import sleep
 
-app = Celery("main", broker="redis://localhost:6379")
+app = Celery("main", broker="redis://localhost:6379", backend="redis://localhost:6379")
 
 @app.task
 def process(x, y):
